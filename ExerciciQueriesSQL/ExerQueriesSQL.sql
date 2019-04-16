@@ -18,6 +18,14 @@ SELECT carriers.CarrierCode, flights.colYear, flights.colMonth, avg(flights.ArrD
     group by flights.Origin, flights.colYear, flights.colMonth 
     order by flights.Origin, flights.colYear, flights.colMonth;
 
+SELECT carriers.CarrierCode, flights.colYear, flights.colMonth, avg(flights.ArrDelay) as prom_Ret_Sortides,
+		sum(flights.Cancelled) as total_cancelled
+	FROM flights, carriers
+    where flights.Cancelled=1 and carriers.CarrierCode=flights.UniqueCarrier
+    group by flights.UniqueCarrier, flights.colYear, flights.colMonth 
+    order by flights.Origin, flights.colYear, flights.colMonth;
+
+
 /*Ex6*/
 select flights.tailnum, SUM(flights.distance) as total_distance
 	from flights
